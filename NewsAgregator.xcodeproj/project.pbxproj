@@ -11,6 +11,9 @@
 		C41B966025080D6500D3F3EE /* FeedFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41B965F25080D6500D3F3EE /* FeedFetcher.swift */; };
 		C41B9662250811DD00D3F3EE /* FeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41B9661250811DD00D3F3EE /* FeedManager.swift */; };
 		C41B966425082E9000D3F3EE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41B966325082E9000D3F3EE /* Constants.swift */; };
+		C41B96662508E6ED00D3F3EE /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41B96652508E6ED00D3F3EE /* FeedItem.swift */; };
+		C41B96682508E80900D3F3EE /* FeedTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41B96672508E80900D3F3EE /* FeedTransformer.swift */; };
+		C41B966A25092B8900D3F3EE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41B966925092B8900D3F3EE /* Extensions.swift */; };
 		C4720811250786CF00EA2727 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4720810250786CF00EA2727 /* AppDelegate.swift */; };
 		C4720813250786CF00EA2727 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4720812250786CF00EA2727 /* SceneDelegate.swift */; };
 		C4720815250786CF00EA2727 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4720814250786CF00EA2727 /* ViewController.swift */; };
@@ -27,6 +30,9 @@
 		C41B965F25080D6500D3F3EE /* FeedFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedFetcher.swift; sourceTree = "<group>"; };
 		C41B9661250811DD00D3F3EE /* FeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedManager.swift; sourceTree = "<group>"; };
 		C41B966325082E9000D3F3EE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C41B96652508E6ED00D3F3EE /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
+		C41B96672508E80900D3F3EE /* FeedTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTransformer.swift; sourceTree = "<group>"; };
+		C41B966925092B8900D3F3EE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C472080D250786CF00EA2727 /* NewsAgregator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsAgregator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4720810250786CF00EA2727 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4720812250786CF00EA2727 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,9 +97,12 @@
 				C4720810250786CF00EA2727 /* AppDelegate.swift */,
 				C41B966325082E9000D3F3EE /* Constants.swift */,
 				C4720812250786CF00EA2727 /* SceneDelegate.swift */,
+				C41B966925092B8900D3F3EE /* Extensions.swift */,
 				C41B965D25080CA100D3F3EE /* NetworkManager.swift */,
 				C41B965F25080D6500D3F3EE /* FeedFetcher.swift */,
 				C41B9661250811DD00D3F3EE /* FeedManager.swift */,
+				C41B96672508E80900D3F3EE /* FeedTransformer.swift */,
+				C41B96652508E6ED00D3F3EE /* FeedItem.swift */,
 				C4720814250786CF00EA2727 /* ViewController.swift */,
 				C4720816250786CF00EA2727 /* Main.storyboard */,
 				C4720819250786D100EA2727 /* Assets.xcassets */,
@@ -218,10 +227,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C41B96682508E80900D3F3EE /* FeedTransformer.swift in Sources */,
 				C41B966025080D6500D3F3EE /* FeedFetcher.swift in Sources */,
 				C41B965E25080CA100D3F3EE /* NetworkManager.swift in Sources */,
 				C4720815250786CF00EA2727 /* ViewController.swift in Sources */,
 				C41B9662250811DD00D3F3EE /* FeedManager.swift in Sources */,
+				C41B966A25092B8900D3F3EE /* Extensions.swift in Sources */,
+				C41B96662508E6ED00D3F3EE /* FeedItem.swift in Sources */,
 				C41B966425082E9000D3F3EE /* Constants.swift in Sources */,
 				C4720811250786CF00EA2727 /* AppDelegate.swift in Sources */,
 				C4720813250786CF00EA2727 /* SceneDelegate.swift in Sources */,
