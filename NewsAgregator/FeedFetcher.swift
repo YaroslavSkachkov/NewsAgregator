@@ -11,7 +11,6 @@ import FeedKit
 
 protocol Fetcher {
     var baseURL: URL { get }
-    var fetchedItems: [RSSFeedItem] { get }
 }
 
 class FeedFetcher: Fetcher {
@@ -27,12 +26,14 @@ class FeedFetcher: Fetcher {
         return url
     }
     
-    var fetchedItems: [RSSFeedItem] {
-        return []
-    }
-    
-    func fetchFeed(completion: @escaping ([RSSFeedItem], ParserError?) -> Void) {
-        fetchFeed(from: baseURL, completion: completion)
+    func fetchFeed(completion: @escaping ([FeedItem], ParserError?) -> Void) {
+        fetchFeed(from: baseURL) { [weak self] feedItems, error in
+            if let unwBaseURL = self?.baseURL {
+                FeedTransformer.sharedInstance.transformFeedItems(feedItems, from: unwBaseURL) { feedItems in
+                    completion(feedItems, nil)
+                }
+            }
+        }
     }
     
     private func fetchFeed(from baseURL: URL, completion: @escaping ([RSSFeedItem], ParserError?) -> Void) {
