@@ -3,10 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C41B965E25080CA100D3F3EE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41B965D25080CA100D3F3EE /* NetworkManager.swift */; };
+		C41B966025080D6500D3F3EE /* FeedFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41B965F25080D6500D3F3EE /* FeedFetcher.swift */; };
+		C41B9662250811DD00D3F3EE /* FeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41B9661250811DD00D3F3EE /* FeedManager.swift */; };
+		C41B966425082E9000D3F3EE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41B966325082E9000D3F3EE /* Constants.swift */; };
 		C4720811250786CF00EA2727 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4720810250786CF00EA2727 /* AppDelegate.swift */; };
 		C4720813250786CF00EA2727 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4720812250786CF00EA2727 /* SceneDelegate.swift */; };
 		C4720815250786CF00EA2727 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4720814250786CF00EA2727 /* ViewController.swift */; };
@@ -19,6 +23,10 @@
 /* Begin PBXFileReference section */
 		5C439FE82485D181AD5B26EC /* Pods-NewsAgregator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsAgregator.release.xcconfig"; path = "Target Support Files/Pods-NewsAgregator/Pods-NewsAgregator.release.xcconfig"; sourceTree = "<group>"; };
 		7AC0D01636A3AF708D6CE06C /* Pods-NewsAgregator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsAgregator.debug.xcconfig"; path = "Target Support Files/Pods-NewsAgregator/Pods-NewsAgregator.debug.xcconfig"; sourceTree = "<group>"; };
+		C41B965D25080CA100D3F3EE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		C41B965F25080D6500D3F3EE /* FeedFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedFetcher.swift; sourceTree = "<group>"; };
+		C41B9661250811DD00D3F3EE /* FeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedManager.swift; sourceTree = "<group>"; };
+		C41B966325082E9000D3F3EE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C472080D250786CF00EA2727 /* NewsAgregator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsAgregator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4720810250786CF00EA2727 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4720812250786CF00EA2727 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -48,7 +56,6 @@
 				7AC0D01636A3AF708D6CE06C /* Pods-NewsAgregator.debug.xcconfig */,
 				5C439FE82485D181AD5B26EC /* Pods-NewsAgregator.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -82,7 +89,11 @@
 			isa = PBXGroup;
 			children = (
 				C4720810250786CF00EA2727 /* AppDelegate.swift */,
+				C41B966325082E9000D3F3EE /* Constants.swift */,
 				C4720812250786CF00EA2727 /* SceneDelegate.swift */,
+				C41B965D25080CA100D3F3EE /* NetworkManager.swift */,
+				C41B965F25080D6500D3F3EE /* FeedFetcher.swift */,
+				C41B9661250811DD00D3F3EE /* FeedManager.swift */,
 				C4720814250786CF00EA2727 /* ViewController.swift */,
 				C4720816250786CF00EA2727 /* Main.storyboard */,
 				C4720819250786D100EA2727 /* Assets.xcassets */,
@@ -207,7 +218,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C41B966025080D6500D3F3EE /* FeedFetcher.swift in Sources */,
+				C41B965E25080CA100D3F3EE /* NetworkManager.swift in Sources */,
 				C4720815250786CF00EA2727 /* ViewController.swift in Sources */,
+				C41B9662250811DD00D3F3EE /* FeedManager.swift in Sources */,
+				C41B966425082E9000D3F3EE /* Constants.swift in Sources */,
 				C4720811250786CF00EA2727 /* AppDelegate.swift in Sources */,
 				C4720813250786CF00EA2727 /* SceneDelegate.swift in Sources */,
 			);
