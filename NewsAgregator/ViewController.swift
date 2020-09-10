@@ -12,14 +12,32 @@ import FeedKit
 class ViewController: UIViewController {
     
     var fetchedItems: [RSSFeedItem] = []
-    let feedFetcher = FeedFetcher(with: "https://lenta.ru/rss/news")
+    let stringURL = "https://lenta.ru/rss/news"
+    let gazetaURL = "https://www.gazeta.ru/export/rss/first.xml"
+    let feedFetcher: NetworkFeedFetcher = NetworkFeedFetcher(with: URL(string: "https://lenta.ru/rss/news")!)
+    let gazetaFetcher: NetworkFeedFetcher = NetworkFeedFetcher(with: URL(string: "https://www.gazeta.ru/export/rss/first.xml")!)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        feedFetcher.fetchFeed { feedItems, error in
-            print(feedItems)
+        let arr:[NetworkFeedFetcher] = [gazetaFetcher, feedFetcher]
+        var counter: Int = 0
+        var feedItemsArr: [FeedItem] = []
+        arr.enumerated().forEach { index, feedFetcher in
+            print("[ForEach:\(index)] --- ")
+            feedFetcher.fetchFeed { result in
+                print("[FetchFeed:\(index)] --- ")
+                assert(Thread.isMainThread)
+                switch result {
+                case .success(let feedItems):
+                    counter += 1
+                    feedItemsArr += feedItems
+                    if counter == arr.count { print("\(FeedManager.sharedInstance.sortByDate(feedItemsArr)) \n") }
+                case .failure(let error):
+                    assert(true, error.localizedDescription)
+                }
+            }
         }
     }
     
-
+    
 }

@@ -7,3 +7,18 @@
 //
 
 import Foundation
+import FeedKit
+
+class FeedManager {
+    
+    static let sharedInstance: FeedManager = {
+        return FeedManager()
+    }()
+    
+    private init() {}
+    
+    func sortByDate(_ feedItems: [FeedItem]) -> [FeedItem] {
+        return feedItems.sorted(by: {$0.date > $1.date})
+    }
+    
+}

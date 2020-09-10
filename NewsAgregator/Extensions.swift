@@ -8,24 +8,20 @@
 
 import Foundation
 
-extension URL {
-    var rssSource: String {
-        var source: String = ""
-        if let unwHost = host {
-            source = unwHost
-            source.removeSubrange(source.firstIndex(of: ".")!..<source.endIndex)
-            source.capitalizeFirstLetter()
-        }
-        return source
-    }
-}
-
 extension String {
     private func capitalizingFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst()
     }
-
+    
     mutating func capitalizeFirstLetter() {
         self = self.capitalizingFirstLetter()
     }
+    
+    
+    #warning("Use default URL constructor with if-let")
+    func toURL() throws -> URL {
+        guard let url = URL(string: self) else { throw NAError.invalidString }
+        return url
+    }
 }
+

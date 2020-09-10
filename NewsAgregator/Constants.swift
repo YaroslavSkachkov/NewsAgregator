@@ -9,3 +9,4 @@
 import Foundation
 
 let endpointURL: URL = URL(string: "http://lenta.ru/rss/news")!
+let baseRssSource: String = "Lenta"

@@ -17,56 +17,39 @@ class FeedTransformer {
     
     private init() { }
     
+    #warning("Print Error in case of invalid feedItem")
     func transformFeedItems(_ feedItems: [RSSFeedItem],
-                               from url: URL,
-                             completion: @escaping ([FeedItem]) -> Void) {
+                            from url: URL) -> [FeedItem] {
         var transformedFeedItems: [FeedItem] = []
         feedItems.forEach { feedItem in
-            transformFeedItem(feedItem, from: url) { feedItem in
-                transformedFeedItems.append(feedItem)
-            }
+            #warning("Force unwrapped optional feedItem")
+            transformedFeedItems.append(transformFeedItem(feedItem, from: url)!)
         }
-        completion(transformedFeedItems)
+        return transformedFeedItems
     }
     
+    
+    #warning("Make throwable")
     private func transformFeedItem(_ feedItem: RSSFeedItem,
-                                     from url: URL,
-                                   completion: @escaping (FeedItem) -> Void) {
+                                   from url: URL) -> FeedItem? {
         let title: String = feedItem.title ?? ""
-        let feedItemURL: String = feedItem.link ?? ""
         let description: String = feedItem.description ?? ""
-        let source: String = url.rssSource
-        let img: UIImage = UIImage()
+        #warning("Force unwrapped optional")
+        let source: String = url.host!
         
-        if let enclosure = feedItem.enclosure, let attributes = enclosure.attributes, let imgURL = attributes.url {
-            
-            loadImage(from: URL(string: imgURL)!) { image in
-                completion(FeedItem(title: title,
-                description: description,
-                        img: image,
-                        url: feedItemURL,
-                     source: source))
-            }
-            
+        if let feedItemURL = try? feedItem.link?.toURL(),
+            let enclosure = feedItem.enclosure,
+            let attributes = enclosure.attributes,
+            let imgURL = try? attributes.url?.toURL(),
+            let date = feedItem.pubDate {
+            return FeedItem(date: date,
+                            title: title,
+                            description: description,
+                            imgURL: imgURL,
+                            url: feedItemURL,
+                            source: source)
         }
-        
-        completion(FeedItem(title: title,
-                      description: description,
-                              img: img,
-                              url: feedItemURL,
-                           source: source))
-    }
-    
-    private func loadImage(from url: URL,
-                         completion: @escaping (UIImage) -> Void) {
-        DispatchQueue.global().async {
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        completion(image)
-                    }
-                }
-            }
-        }
+        assertionFailure()
+        return nil
     }
 }
