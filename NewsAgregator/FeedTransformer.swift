@@ -33,7 +33,7 @@ class FeedTransformer {
     private func transformFeedItem(_ feedItem: RSSFeedItem,
                                      from url: URL) throws -> FeedItem {
         if let title: String = feedItem.title,
-            let description: String = feedItem.description,
+            let description: String = feedItem.description?.trimmingCharacters(in: .whitespacesAndNewlines),
             let source: String = url.host,
             let feedItemURLString: String = feedItem.link,
             let feedItemURL: URL = URL(string: feedItemURLString),

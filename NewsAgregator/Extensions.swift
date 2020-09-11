@@ -8,6 +8,8 @@
 
 import Foundation
 
+#warning("For future extensions")
+
 extension String {
     private func capitalizingFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst()

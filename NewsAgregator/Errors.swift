@@ -8,6 +8,7 @@
 
 import Foundation
 
+#warning("Add more error cases. Add descriptions")
 enum NAError: Error {
     case invalidString
     case feedItemParseError

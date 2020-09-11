@@ -13,6 +13,6 @@ struct FeedItem {
     var title: String
     var description: String
     var imgURL: URL
-    var url: URL // Здесь лучше заюзать УРЛ потому что у урла есть куча пропертей, чтобы мы во всей прилаги оперировали только урлом а достали его ТОЛЬКО В ОДНОМ МЕСТЕ
+    var url: URL
     var source: String
 }

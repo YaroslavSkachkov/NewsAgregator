@@ -8,6 +8,5 @@
 
 import Foundation
 
-#warning("Force unwrapped URL")
-let endpointURL: URL = URL(string: "http://lenta.ru/rss/news")!
-let baseRssSource: String = "lenta.ru"
+#warning("For future constants")
+
