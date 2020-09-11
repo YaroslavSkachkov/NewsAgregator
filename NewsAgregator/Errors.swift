@@ -12,4 +12,5 @@ enum NAError: Error {
     case invalidString
     case feedItemParseError
     case invalidFeedType
+    case transformationError
 }

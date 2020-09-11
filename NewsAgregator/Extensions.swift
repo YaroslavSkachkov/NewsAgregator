@@ -16,12 +16,5 @@ extension String {
     mutating func capitalizeFirstLetter() {
         self = self.capitalizingFirstLetter()
     }
-    
-    
-    #warning("Use default URL constructor with if-let")
-    func toURL() throws -> URL {
-        guard let url = URL(string: self) else { throw NAError.invalidString }
-        return url
-    }
 }
 

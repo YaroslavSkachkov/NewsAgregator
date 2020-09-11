@@ -22,6 +22,8 @@ class ViewController: UIViewController {
         let arr:[NetworkFeedFetcher] = [gazetaFetcher, feedFetcher]
         var counter: Int = 0
         var feedItemsArr: [FeedItem] = []
+        
+        #warning("Can be case of race conditions. Should work via DispatchQueue")
         arr.enumerated().forEach { index, feedFetcher in
             print("[ForEach:\(index)] --- ")
             feedFetcher.fetchFeed { result in
@@ -33,7 +35,7 @@ class ViewController: UIViewController {
                     feedItemsArr += feedItems
                     if counter == arr.count { print("\(FeedManager.sharedInstance.sortByDate(feedItemsArr)) \n") }
                 case .failure(let error):
-                    assert(true, error.localizedDescription)
+                    assertionFailure(error.localizedDescription)
                 }
             }
         }
