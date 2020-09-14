@@ -15,4 +15,5 @@ struct FeedItem {
     var imgURL: URL
     var url: URL
     var source: String
+    var unread: Bool
 }

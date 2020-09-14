@@ -18,35 +18,35 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PRk-vw-gWA">
-                        <rect key="frame" x="80" y="0.0" width="355" height="20.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="92" y="4" width="343" height="18"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e01-47-6im">
-                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                        <rect key="frame" x="4" y="4" width="80" height="80"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="e01-47-6im" secondAttribute="height" multiplier="1:1" id="Hlh-rn-NFg"/>
                             <constraint firstAttribute="height" constant="80" id="lYc-wr-h1A"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oib-5g-SM1">
-                        <rect key="frame" x="80" y="24.5" width="355" height="56.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="92" y="26" width="343" height="51"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="Oib-5g-SM1" secondAttribute="trailing" id="4BV-A4-iua"/>
-                    <constraint firstItem="PRk-vw-gWA" firstAttribute="leading" secondItem="e01-47-6im" secondAttribute="trailing" id="5Fr-1g-YEG"/>
-                    <constraint firstItem="Oib-5g-SM1" firstAttribute="leading" secondItem="e01-47-6im" secondAttribute="trailing" id="KLA-Dq-HMd"/>
-                    <constraint firstItem="e01-47-6im" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Qg6-kP-2bv"/>
+                    <constraint firstItem="PRk-vw-gWA" firstAttribute="leading" secondItem="e01-47-6im" secondAttribute="trailing" constant="8" id="5Fr-1g-YEG"/>
+                    <constraint firstItem="Oib-5g-SM1" firstAttribute="leading" secondItem="e01-47-6im" secondAttribute="trailing" constant="8" id="KLA-Dq-HMd"/>
+                    <constraint firstItem="e01-47-6im" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="Qg6-kP-2bv"/>
                     <constraint firstAttribute="trailing" secondItem="PRk-vw-gWA" secondAttribute="trailing" id="T8Y-Rn-7qD"/>
-                    <constraint firstItem="PRk-vw-gWA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ZCD-W0-KBs"/>
+                    <constraint firstItem="PRk-vw-gWA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="ZCD-W0-KBs"/>
                     <constraint firstItem="Oib-5g-SM1" firstAttribute="top" secondItem="PRk-vw-gWA" secondAttribute="bottom" constant="4" id="aHl-sk-c4F"/>
-                    <constraint firstAttribute="bottom" secondItem="Oib-5g-SM1" secondAttribute="bottom" id="gXj-Rp-zTF"/>
-                    <constraint firstItem="e01-47-6im" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="hkO-an-O6N"/>
+                    <constraint firstAttribute="bottom" secondItem="Oib-5g-SM1" secondAttribute="bottom" constant="4" id="gXj-Rp-zTF"/>
+                    <constraint firstItem="e01-47-6im" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="4" id="hkO-an-O6N"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

@@ -20,7 +20,7 @@ class FeedTableVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "News"
-        self.tableView.estimatedRowHeight = 80.0
+        self.tableView.estimatedRowHeight = 140.0
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "feedCell")
         let arr:[NetworkFeedFetcher] = [gazetaFetcher, feedFetcher]
@@ -43,6 +43,11 @@ class FeedTableVC: UITableViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
+    }
+    
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -50,14 +55,18 @@ class FeedTableVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let feedItem: FeedItem = feedItems[indexPath.row]
         let feedCell: FeedTableViewCell = tableView.dequeueReusableCell(withIdentifier: "feedCell", for: indexPath) as! FeedTableViewCell
-        feedCell.titleLabel.text = feedItems[indexPath.row].title
-        feedCell.descriptionLabel.text = feedItems[indexPath.row].description
-        feedCell.feedImageView.kf.setImage(with: feedItems[indexPath.row].imgURL)
+        feedCell.titleLabel.text = feedItem.title
+        feedCell.descriptionLabel.text = feedItem.description
+        feedCell.feedImageView.kf.setImage(with: feedItem.imgURL)
+        feedCell.unread = feedItem.unread
         return feedCell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        present(SFSafariViewController(url: feedItems[indexPath.row].url), animated: true, completion: nil)
+        present(SFSafariViewController(url: feedItems[indexPath.row].url), animated: true) {
+            self.feedItems[indexPath.row].unread = false
+        }
     }
 }

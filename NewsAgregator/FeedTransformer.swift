@@ -47,7 +47,8 @@ class FeedTransformer {
                      description: description,
                           imgURL: imgURL,
                              url: feedItemURL,
-                          source: source)
+                          source: source,
+                          unread: true)
         }
         assertionFailure(NAError.transformationError.localizedDescription)
         throw NAError.transformationError
