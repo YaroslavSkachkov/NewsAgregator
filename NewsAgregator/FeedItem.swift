@@ -6,7 +6,8 @@
 //  Copyright © 2020 YaroslavSkachkov. All rights reserved.
 //
 
-import UIKit
+import Foundation
+import RealmSwift
 
 struct FeedItem {
     var date: Date
@@ -16,4 +17,18 @@ struct FeedItem {
     var url: URL
     var source: String
     var unread: Bool
+}
+
+class FeedItemRealmObject: Object {
+    @objc dynamic var date: Date = Date()
+    @objc dynamic var feedTitle: String = ""
+    @objc dynamic var feedDescription: String = ""
+    @objc dynamic var imgURL: String = ""
+    @objc dynamic var url: String = ""
+    @objc dynamic var source: String = ""
+    @objc dynamic var unread: Bool = true
+    
+    override class func primaryKey() -> String? {
+        return "url"
+    }
 }

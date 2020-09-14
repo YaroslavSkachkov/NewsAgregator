@@ -7,4 +7,5 @@ inhibit_all_warnings!
 target 'NewsAgregator' do
   pod 'FeedKit', '~> 9.0'
   pod 'Kingfisher', '~> 5.0'
+  pod 'RealmSwift', '~> 5.0'
 end

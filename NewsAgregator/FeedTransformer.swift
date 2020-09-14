@@ -30,6 +30,32 @@ class FeedTransformer {
         return transformedFeedItems
     }
     
+    func transformToFeedItemRealmObj(_ feedItem: FeedItem) -> FeedItemRealmObject {
+        let feedItemRealmObject = FeedItemRealmObject()
+        feedItemRealmObject.date = feedItem.date
+        feedItemRealmObject.feedTitle = feedItem.title
+        feedItemRealmObject.feedDescription = feedItem.description
+        feedItemRealmObject.imgURL = feedItem.imgURL.absoluteString
+        feedItemRealmObject.url = feedItem.url.absoluteString
+        feedItemRealmObject.source = feedItem.source
+        feedItemRealmObject.unread = feedItem.unread
+        return feedItemRealmObject
+    }
+    
+    func transformFromFeedItemRealmObj(_ realmFeedItem: FeedItemRealmObject) throws -> FeedItem {
+        if let imgURL = URL(string: realmFeedItem.imgURL),
+           let url = URL(string: realmFeedItem.url) {
+            return FeedItem(date: realmFeedItem.date,
+                  title: realmFeedItem.feedTitle,
+            description: realmFeedItem.feedDescription,
+                 imgURL: imgURL,
+                    url: url,
+                 source: realmFeedItem.source,
+                 unread: realmFeedItem.unread)
+        }
+        throw NAError.transformationError
+    }
+    
     private func transformFeedItem(_ feedItem: RSSFeedItem,
                                      from url: URL) throws -> FeedItem {
         if let title: String = feedItem.title,

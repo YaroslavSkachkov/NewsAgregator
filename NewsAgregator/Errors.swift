@@ -14,4 +14,6 @@ enum NAError: Error {
     case feedItemParseError
     case invalidFeedType
     case transformationError
+    case realmInitializationError
+    case writingToDBError
 }
