@@ -10,28 +10,20 @@ import Foundation
 import FeedKit
 import RealmSwift
 
-protocol FeedItemManager {
-    func saveFeedItems(_ feedItems: [FeedItem])
+protocol FeedManagerProtocol {
+    func loadFeed(_ completion: @escaping ()->())
     func getFeedItems() -> [FeedItem]
+    func updateUnreadStatus(_ item: FeedItem, fullyWatched: Bool)
 }
 
-class FeedManager: FeedItemManager {
+class FeedManager: FeedManagerProtocol {
     
-    var realm: Realm?
-    let feedFetcher: NetworkFeedFetcher = NetworkFeedFetcher(with: URL(string: "https://lenta.ru/rss/news")!)
-    let gazetaFetcher: NetworkFeedFetcher = NetworkFeedFetcher(with: URL(string: "https://www.gazeta.ru/export/rss/first.xml")!)
-    private var feedItems: [FeedItem] = []
+    let databaseManager: DatabaseManagerProtocol
+    let fetchers: [NetworkFeedFetcher]
     
-    static let sharedInstance: FeedManager = {
-        return FeedManager()
-    }()
-    
-    private init() {
-        do {
-            self.realm = try Realm()
-        } catch {
-            assertionFailure(NAError.realmInitializationError.localizedDescription)
-        }
+    init(databaseManager: DatabaseManagerProtocol, fetchers: [NetworkFeedFetcher]) {
+        self.databaseManager = databaseManager
+        self.fetchers = fetchers
     }
     
     func sortByDate(_ feedItems: [FeedItem]) -> [FeedItem] {
@@ -39,8 +31,8 @@ class FeedManager: FeedItemManager {
     }
     
     func loadFeed(_ completion: @escaping ()->()) {
-        let fetchers: [NetworkFeedFetcher] = [gazetaFetcher, feedFetcher]
         
+        var feedItems: [FeedItem] = []
         var counter: Int = 0
         
         #warning("Can be case of race conditions. Should work via DispatchGroup")
@@ -51,8 +43,11 @@ class FeedManager: FeedItemManager {
                 switch result {
                 case .success(let fetchFeedItems):
                     counter += 1
-                    self?.feedItems += fetchFeedItems
-                    if counter == fetchers.count { FeedManager.sharedInstance.saveFeedItems(self?.feedItems ?? []); completion()}
+                    feedItems += fetchFeedItems
+                    if counter == self?.fetchers.count {
+                        self?.databaseManager.saveFeedItems(feedItems)
+                        completion()
+                    }
                 case .failure(let error):
                     assertionFailure(error.localizedDescription)
                 }
@@ -60,52 +55,12 @@ class FeedManager: FeedItemManager {
         }
     }
     
-    func saveFeedItems(_ feedItems: [FeedItem]) {
-        if let unwRealm = realm {
-            feedItems.forEach { feedItem in
-                let feedItemRealmObject: FeedItemRealmObject = FeedTransformer.sharedInstance.transformToFeedItemRealmObj(feedItem)
-                do {
-                    try unwRealm.write() {
-                        if (unwRealm.object(ofType: FeedItemRealmObject.self, forPrimaryKey: feedItemRealmObject.url) == nil) {
-                            unwRealm.add(feedItemRealmObject)
-                        }
-                    }
-                } catch {
-                    assertionFailure(NAError.writingToDBError.localizedDescription)
-                    print(NAError.writingToDBError.localizedDescription)
-                }
-            }
-        }
-    }
-    
     func getFeedItems() -> [FeedItem] {
-        var feedItems: [FeedItem] = []
-        if let unwRealm = realm {
-            unwRealm.objects(FeedItemRealmObject.self).sorted(by: {$0.date > $1.date}).forEach { feedItem in
-                do {
-                    try feedItems.append(FeedTransformer.sharedInstance.transformFromFeedItemRealmObj(feedItem))
-                } catch {
-                    assertionFailure(error.localizedDescription)
-                }
-            }
-        }
-        return feedItems
-    }
-    
-    func removeFeedItem() {
-        
+        return databaseManager.getFeedItems()
     }
     
     func updateUnreadStatus(_ item: FeedItem, fullyWatched: Bool) {
-        if let unwRealm = realm {
-            do {
-                try unwRealm.write() {
-                    unwRealm.object(ofType: FeedItemRealmObject.self, forPrimaryKey: item.url.absoluteString)?.unread = fullyWatched
-                }
-            } catch {
-                assertionFailure(NAError.writingToDBError.localizedDescription)
-                print(NAError.writingToDBError.localizedDescription)
-            }
-        }
+        databaseManager.updateUnreadStatus(item, fullyWatched: fullyWatched)
     }
+    
 }

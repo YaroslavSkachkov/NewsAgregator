@@ -13,10 +13,11 @@ import Kingfisher
 class FeedTableVC: UITableViewController {
     
     var feedItems: [FeedItem] = []
+    var feedManager: FeedManagerProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        FeedManager.sharedInstance.loadFeed { [weak self] in
+        feedManager.loadFeed { [weak self] in
             self?.tableView.reloadData()
         }
         title = "News"
@@ -33,12 +34,12 @@ class FeedTableVC: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let feedItemsFromRealm = FeedManager.sharedInstance.getFeedItems()
+        let feedItemsFromRealm = feedManager.getFeedItems()
         return feedItemsFromRealm.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let feedItem = FeedManager.sharedInstance.getFeedItems()[indexPath.row]
+        let feedItem = feedManager.getFeedItems()[indexPath.row]
         let feedCell: FeedTableViewCell = tableView.dequeueReusableCell(withIdentifier: "feedCell", for: indexPath) as! FeedTableViewCell
         feedCell.titleLabel.text = feedItem.title
         feedCell.descriptionLabel.text = feedItem.description
@@ -48,9 +49,9 @@ class FeedTableVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let feedItem = FeedManager.sharedInstance.getFeedItems()[indexPath.row]
-        present(SFSafariViewController(url: feedItem.url), animated: true) {
-            FeedManager.sharedInstance.updateUnreadStatus(feedItem, fullyWatched: false)
+        let feedItem = feedManager.getFeedItems()[indexPath.row]
+        present(SFSafariViewController(url: feedItem.url), animated: true) { [weak self] in
+            self?.feedManager.updateUnreadStatus(feedItem, fullyWatched: false)
         }
     }
 }

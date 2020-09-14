@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    let lentaFetcher: NetworkFeedFetcher = NetworkFeedFetcher(with: URL(string: "https://lenta.ru/rss/news")!)
+    let gazetaFetcher: NetworkFeedFetcher = NetworkFeedFetcher(with: URL(string: "https://www.gazeta.ru/export/rss/first.xml")!)
     
     var window: UIWindow?
 
@@ -17,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame:UIScreen.main.bounds)
         let feedTableVC = FeedTableVC()
+        feedTableVC.feedManager = FeedManager(databaseManager: DatabaseManager(realm: try! Realm()), fetchers: [lentaFetcher, gazetaFetcher])
         let navController = UINavigationController(rootViewController: feedTableVC)
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
