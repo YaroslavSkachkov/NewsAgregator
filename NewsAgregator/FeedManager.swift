@@ -19,18 +19,16 @@ protocol FeedManagerProtocol {
 class FeedManager: FeedManagerProtocol {
     
     let databaseManager: DatabaseManagerProtocol
-    let fetchers: [NetworkFeedFetcher]
+    let settingsManager: SettingsManager
     
-    init(databaseManager: DatabaseManagerProtocol, fetchers: [NetworkFeedFetcher]) {
+    init(databaseManager: DatabaseManagerProtocol, settingsManager: SettingsManager) {
         self.databaseManager = databaseManager
-        self.fetchers = fetchers
-    }
-    
-    func sortByDate(_ feedItems: [FeedItem]) -> [FeedItem] {
-        return feedItems.sorted(by: {$0.date > $1.date})
+        self.settingsManager = settingsManager
     }
     
     func loadFeed(_ completion: @escaping ()->()) {
+        
+        let fetchers = settingsManager.sources().map { NetworkFeedFetcher(with: $0.url) }
         
         var feedItems: [FeedItem] = []
         var counter: Int = 0
@@ -44,7 +42,7 @@ class FeedManager: FeedManagerProtocol {
                 case .success(let fetchFeedItems):
                     counter += 1
                     feedItems += fetchFeedItems
-                    if counter == self?.fetchers.count {
+                    if counter == fetchers.count {
                         self?.databaseManager.saveFeedItems(feedItems)
                         completion()
                     }

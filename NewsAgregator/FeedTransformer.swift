@@ -9,6 +9,8 @@
 import UIKit
 import FeedKit
 
+#warning("FeedItem models should be improved in case of unusual rss model (like from buzzfeed.com)")
+
 class FeedTransformer {
     
     static let sharedInstance: FeedTransformer = {
@@ -35,7 +37,7 @@ class FeedTransformer {
         feedItemRealmObject.date = feedItem.date
         feedItemRealmObject.feedTitle = feedItem.title
         feedItemRealmObject.feedDescription = feedItem.description
-        feedItemRealmObject.imgURL = feedItem.imgURL.absoluteString
+        feedItemRealmObject.imgURL = feedItem.imgURL?.absoluteString
         feedItemRealmObject.url = feedItem.url.absoluteString
         feedItemRealmObject.source = feedItem.source
         feedItemRealmObject.unread = feedItem.unread
@@ -43,7 +45,7 @@ class FeedTransformer {
     }
     
     func transformFromFeedItemRealmObj(_ realmFeedItem: FeedItemRealmObject) throws -> FeedItem {
-        if let imgURL = URL(string: realmFeedItem.imgURL),
+        if let imgURL = URL(string: realmFeedItem.imgURL ?? ""),
            let url = URL(string: realmFeedItem.url) {
             return FeedItem(date: realmFeedItem.date,
                   title: realmFeedItem.feedTitle,

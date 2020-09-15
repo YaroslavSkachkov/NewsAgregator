@@ -12,17 +12,17 @@ import RealmSwift
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    let lentaFetcher: NetworkFeedFetcher = NetworkFeedFetcher(with: URL(string: "https://lenta.ru/rss/news")!)
-    let gazetaFetcher: NetworkFeedFetcher = NetworkFeedFetcher(with: URL(string: "https://www.gazeta.ru/export/rss/first.xml")!)
-    
+    var navController: UINavigationController?
     var window: UIWindow?
+    let settingsManager: SettingsManager = StubSettingsManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         self.window = UIWindow(frame:UIScreen.main.bounds)
         let feedTableVC = FeedTableVC()
-        feedTableVC.feedManager = FeedManager(databaseManager: DatabaseManager(realm: try! Realm()), fetchers: [lentaFetcher, gazetaFetcher])
-        let navController = UINavigationController(rootViewController: feedTableVC)
+        feedTableVC.delegate = self
+        feedTableVC.feedManager = FeedManager(databaseManager: DatabaseManager(realm: try! Realm()), settingsManager: settingsManager)
+        navController = UINavigationController(rootViewController: feedTableVC)
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
         
@@ -30,3 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+extension AppDelegate: FeedTableVCDelegate {
+    func onSettingsButtonTapped() {
+        let settingsVC = SettingsVC()
+        settingsVC.settingsManager = settingsManager
+        navController!.pushViewController(settingsVC, animated: true)
+    }
+}

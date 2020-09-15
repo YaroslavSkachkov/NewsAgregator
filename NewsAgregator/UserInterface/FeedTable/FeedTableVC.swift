@@ -10,17 +10,22 @@ import UIKit
 import SafariServices
 import Kingfisher
 
+protocol FeedTableVCDelegate {
+    func onSettingsButtonTapped()
+}
+
+#warning("ИСПРАВИТЬ КЕЙС ФЕТЧА НОВОСТИ БЕЗ ДЕСКРИПШЕНА")
+
 class FeedTableVC: UITableViewController {
     
     var feedItems: [FeedItem] = []
     var feedManager: FeedManagerProtocol!
+    var delegate: FeedTableVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        feedManager.loadFeed { [weak self] in
-            self?.tableView.reloadData()
-        }
         title = "News"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(openSettings))
         self.tableView.estimatedRowHeight = 140.0
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "feedCell")
@@ -28,7 +33,13 @@ class FeedTableVC: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        tableView.reloadData()
+        feedManager.loadFeed { [weak self] in
+            self?.tableView.reloadData()
+        }
+    }
+    
+    @objc private func openSettings() {
+        delegate?.onSettingsButtonTapped()
     }
     
     // MARK: - Table view data source

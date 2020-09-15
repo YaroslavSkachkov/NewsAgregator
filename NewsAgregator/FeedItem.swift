@@ -13,7 +13,7 @@ struct FeedItem {
     var date: Date
     var title: String
     var description: String
-    var imgURL: URL
+    var imgURL: URL?
     var url: URL
     var source: String
     var unread: Bool
@@ -23,7 +23,7 @@ class FeedItemRealmObject: Object {
     @objc dynamic var date: Date = Date()
     @objc dynamic var feedTitle: String = ""
     @objc dynamic var feedDescription: String = ""
-    @objc dynamic var imgURL: String = ""
+    @objc dynamic var imgURL: String? = nil
     @objc dynamic var url: String = ""
     @objc dynamic var source: String = ""
     @objc dynamic var unread: Bool = true
