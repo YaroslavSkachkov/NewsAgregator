@@ -9,19 +9,18 @@
 import UIKit
 
 class FetcherCell: UITableViewCell {
+    
+    typealias SwitchCallback = (Bool) -> Void
+    var switchCallback: SwitchCallback?
 
     @IBOutlet weak var source: UILabel!
     @IBOutlet weak var isActiveSwitch: UISwitch!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
+    @IBAction func switchChangedState(_ sender: UISwitch) {
+        switchCallback?(sender.isOn)
+    }
 }

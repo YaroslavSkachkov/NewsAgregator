@@ -27,8 +27,8 @@ class FeedManager: FeedManagerProtocol {
     }
     
     func loadFeed(_ completion: @escaping ()->()) {
-        
-        let fetchers = settingsManager.sources().map { NetworkFeedFetcher(with: $0.url) }
+        let activeSources = settingsManager.sources().filter{ $0.isActive == true }
+        let fetchers = activeSources.map { NetworkFeedFetcher(with: $0.url) }
         
         var feedItems: [FeedItem] = []
         var counter: Int = 0

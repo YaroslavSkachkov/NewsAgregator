@@ -20,8 +20,6 @@ class SettingsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        fetchers = [gazetaFetcher, lentaFetcher]
-        
         self.settingsTable.dataSource = self
         self.settingsTable.register(UINib(nibName: "TextFieldCell", bundle: nil), forCellReuseIdentifier: "textFieldCell")
         self.settingsTable.register(UINib(nibName: "FetcherCell", bundle: nil), forCellReuseIdentifier: "fetcherCell")
@@ -37,17 +35,6 @@ class SettingsVC: UIViewController {
         self.settingsTable.reloadData()
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
 
 extension SettingsVC: UITableViewDataSource {
@@ -59,9 +46,16 @@ extension SettingsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let sources: [Source] = settingsManager.sources()
         let fetcherCell: FetcherCell = tableView.dequeueReusableCell(withIdentifier: "fetcherCell", for: indexPath) as! FetcherCell
+        
         #warning("траблы с хостом, может выводиться без хоста")
+        
         fetcherCell.textLabel?.text = sources[indexPath.row].url.host
         fetcherCell.isActiveSwitch.isOn = sources[indexPath.row].isActive
+        
+        fetcherCell.switchCallback = { [weak self] in
+            self?.settingsManager.changeSourceActiveness(url: sources[indexPath.row].url, active: $0)
+        }
+        
         return fetcherCell
     }
 }

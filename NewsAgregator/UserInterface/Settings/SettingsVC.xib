@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2nu-Xy-Fje" userLabel="SettingsTable">
-                    <rect key="frame" x="0.0" y="264" width="414" height="598"/>
+                    <rect key="frame" x="0.0" y="196.5" width="414" height="665.5"/>
                 </tableView>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4lZ-I4-wvT">
                     <rect key="frame" x="30.5" y="132.5" width="250" height="34"/>
@@ -43,7 +43,7 @@
                 <constraint firstItem="2nu-Xy-Fje" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="CPM-KM-R5g"/>
                 <constraint firstItem="fN1-SS-l1O" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="1/3" id="JXb-LL-Ca1"/>
                 <constraint firstItem="4lZ-I4-wvT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" multiplier="3/4" id="Z7D-O3-8D0"/>
-                <constraint firstItem="2nu-Xy-Fje" firstAttribute="top" secondItem="4lZ-I4-wvT" secondAttribute="bottom" constant="97.5" id="eoT-BQ-9Or"/>
+                <constraint firstItem="2nu-Xy-Fje" firstAttribute="top" secondItem="4lZ-I4-wvT" secondAttribute="bottom" constant="30" id="eoT-BQ-9Or"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fN1-SS-l1O" secondAttribute="trailing" constant="20" id="m6k-wn-nWk"/>
                 <constraint firstItem="4lZ-I4-wvT" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.603865" id="tNy-kf-o73"/>
                 <constraint firstItem="2nu-Xy-Fje" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="z0d-DZ-DBu"/>

@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var navController: UINavigationController?
     var window: UIWindow?
-    let settingsManager: SettingsManager = StubSettingsManager()
+    let settingsManager: SettingsManager = SettingsManager(realm: try! Realm())
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
