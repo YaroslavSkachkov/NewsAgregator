@@ -19,13 +19,16 @@ protocol FeedTableVCDelegate {
 class FeedTableVC: UITableViewController {
     
     var feedItems: [FeedItem] = []
+    var isExpand: Bool = true
     var feedManager: FeedManagerProtocol!
     var delegate: FeedTableVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        feedManager.delegate = self
         title = "News"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(openSettings))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Expand", style: .plain, target: self, action: #selector(expandFeedItems))
         self.tableView.estimatedRowHeight = 140.0
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "feedCell")
@@ -33,13 +36,15 @@ class FeedTableVC: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        feedManager.loadFeed { [weak self] in
-            self?.tableView.reloadData()
-        }
+        
     }
     
     @objc private func openSettings() {
         delegate?.onSettingsButtonTapped()
+    }
+    
+    @objc private func expandFeedItems() {
+
     }
     
     // MARK: - Table view data source
@@ -53,7 +58,9 @@ class FeedTableVC: UITableViewController {
         let feedItem = feedManager.getFeedItems()[indexPath.row]
         let feedCell: FeedTableViewCell = tableView.dequeueReusableCell(withIdentifier: "feedCell", for: indexPath) as! FeedTableViewCell
         feedCell.titleLabel.text = feedItem.title
-        feedCell.descriptionLabel.text = feedItem.description
+        if isExpand {
+            feedCell.descriptionLabel.text = feedItem.description
+        }
         feedCell.feedImageView.kf.setImage(with: feedItem.imgURL)
         feedCell.unread = feedItem.unread
         return feedCell
@@ -65,4 +72,12 @@ class FeedTableVC: UITableViewController {
             self?.feedManager.updateUnreadStatus(feedItem, fullyWatched: false)
         }
     }
+}
+
+extension FeedTableVC: FeedManagerDelegate {
+    
+    func onFeedLoaded() {
+        tableView.reloadData()
+    }
+    
 }

@@ -12,6 +12,7 @@ class SettingsVC: UIViewController {
     
     
     @IBOutlet weak var urlTextField: UITextField!
+    @IBOutlet weak var refreshTimePicker: UIDatePicker!
     
     var settingsManager: SettingsManager!
     
@@ -35,6 +36,9 @@ class SettingsVC: UIViewController {
         self.settingsTable.reloadData()
     }
     
+    @IBAction func refreshTimePickerValueChanged(_ sender: UIDatePicker) {
+        settingsManager.refreshInterval = sender.countDownDuration
+    }
 }
 
 extension SettingsVC: UITableViewDataSource {

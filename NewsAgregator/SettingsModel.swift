@@ -9,6 +9,10 @@
 import Foundation
 import RealmSwift
 
+protocol SettingsManagerDelegate: class {
+    func onTimerValueChanged(value: TimeInterval)
+}
+
 struct Source {
     var url: URL
     var isActive: Bool
@@ -23,7 +27,9 @@ class SourceRealmObject: Object {
     }
 }
 
-protocol Settings {
+protocol Settings: class {
+    var delegate: SettingsManagerDelegate? { get set }
+    var refreshInterval: TimeInterval { get set }
     func add(fetchedURL: URL)
     func sources() -> [Source]
     func changeSourceActiveness(url: URL, active: Bool)
@@ -32,6 +38,12 @@ protocol Settings {
 class SettingsManager: Settings {
     
     let realm: Realm
+    weak var delegate: SettingsManagerDelegate?
+    var refreshInterval: TimeInterval = 60.0 {
+        didSet {
+            delegate?.onTimerValueChanged(value: refreshInterval/60)
+        }
+    }
     
     init(realm: Realm) {
         self.realm = realm

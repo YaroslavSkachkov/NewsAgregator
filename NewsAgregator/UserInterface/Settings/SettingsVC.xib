@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingsVC" customModule="NewsAgregator" customModuleProvider="target">
             <connections>
+                <outlet property="refreshTimePicker" destination="hcC-qg-qBL" id="f9X-Um-Zox"/>
                 <outlet property="settingsTable" destination="2nu-Xy-Fje" id="jSm-0s-qvd"/>
                 <outlet property="urlTextField" destination="4lZ-I4-wvT" id="jj0-iW-yJj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -20,30 +21,60 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2nu-Xy-Fje" userLabel="SettingsTable">
-                    <rect key="frame" x="0.0" y="196.5" width="414" height="665.5"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2nu-Xy-Fje" userLabel="SettingsTable">
+                    <rect key="frame" x="0.0" y="460" width="414" height="402"/>
                 </tableView>
-                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4lZ-I4-wvT">
-                    <rect key="frame" x="30.5" y="132.5" width="250" height="34"/>
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type source here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4lZ-I4-wvT">
+                    <rect key="frame" x="30.5" y="125" width="250" height="34"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fN1-SS-l1O">
-                    <rect key="frame" x="364" y="130" width="30" height="39"/>
+                    <rect key="frame" x="364" y="122.5" width="30" height="39"/>
                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                     <state key="normal" title="+"/>
                     <connections>
                         <action selector="addURL" destination="-1" eventType="touchUpInside" id="lpD-vL-YYI"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Insert your source below" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYd-R5-YT9">
+                    <rect key="frame" x="20" y="64" width="374" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set refresh interval here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KV9-ie-Mu8">
+                    <rect key="frame" x="20" y="199" width="374" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcC-qg-qBL">
+                    <rect key="frame" x="0.0" y="260" width="414" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="eop-gs-EI1"/>
+                    </constraints>
+                    <connections>
+                        <action selector="refreshTimePickerValueChanged:" destination="-1" eventType="valueChanged" id="Yus-fQ-vgx"/>
+                    </connections>
+                </datePicker>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="4lZ-I4-wvT" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="1/3" id="7OX-Nc-TQo"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="KV9-ie-Mu8" secondAttribute="trailing" constant="20" id="2ck-8l-GQk"/>
+                <constraint firstItem="hcC-qg-qBL" firstAttribute="top" secondItem="KV9-ie-Mu8" secondAttribute="bottom" constant="40" id="8Iq-N1-x3x"/>
+                <constraint firstItem="4lZ-I4-wvT" firstAttribute="top" secondItem="ZYd-R5-YT9" secondAttribute="bottom" constant="40" id="BX3-jz-Nbf"/>
+                <constraint firstItem="fN1-SS-l1O" firstAttribute="centerY" secondItem="4lZ-I4-wvT" secondAttribute="centerY" id="C0z-gI-GuR"/>
                 <constraint firstItem="2nu-Xy-Fje" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="CPM-KM-R5g"/>
-                <constraint firstItem="fN1-SS-l1O" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="1/3" id="JXb-LL-Ca1"/>
+                <constraint firstItem="KV9-ie-Mu8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Ga4-XD-WvS"/>
+                <constraint firstItem="ZYd-R5-YT9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Gc9-Uu-WGf"/>
+                <constraint firstItem="hcC-qg-qBL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Lq9-wY-xfi"/>
+                <constraint firstItem="ZYd-R5-YT9" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="Q3h-zq-M8Y"/>
                 <constraint firstItem="4lZ-I4-wvT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" multiplier="3/4" id="Z7D-O3-8D0"/>
-                <constraint firstItem="2nu-Xy-Fje" firstAttribute="top" secondItem="4lZ-I4-wvT" secondAttribute="bottom" constant="30" id="eoT-BQ-9Or"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ZYd-R5-YT9" secondAttribute="trailing" constant="20" id="iGN-lA-wTF"/>
+                <constraint firstItem="hcC-qg-qBL" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="iLp-DJ-QHy"/>
+                <constraint firstItem="2nu-Xy-Fje" firstAttribute="top" secondItem="hcC-qg-qBL" secondAttribute="bottom" constant="50" id="iyQ-UF-tb2"/>
+                <constraint firstItem="KV9-ie-Mu8" firstAttribute="top" secondItem="4lZ-I4-wvT" secondAttribute="bottom" constant="40" id="izN-Hp-N25"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fN1-SS-l1O" secondAttribute="trailing" constant="20" id="m6k-wn-nWk"/>
                 <constraint firstItem="4lZ-I4-wvT" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.603865" id="tNy-kf-o73"/>
                 <constraint firstItem="2nu-Xy-Fje" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="z0d-DZ-DBu"/>

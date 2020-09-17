@@ -8,48 +8,57 @@
 
 import Foundation
 import FeedKit
-import RealmSwift
+
+protocol FeedManagerDelegate: class {
+    func onFeedLoaded()
+}
 
 protocol FeedManagerProtocol {
-    func loadFeed(_ completion: @escaping ()->())
+    var delegate: FeedManagerDelegate? { get set }
     func getFeedItems() -> [FeedItem]
     func updateUnreadStatus(_ item: FeedItem, fullyWatched: Bool)
 }
 
 class FeedManager: FeedManagerProtocol {
     
+    weak var delegate: FeedManagerDelegate?
     let databaseManager: DatabaseManagerProtocol
-    let settingsManager: SettingsManager
+    let settingsManager: Settings
+    var timer: Timer?
     
     init(databaseManager: DatabaseManagerProtocol, settingsManager: SettingsManager) {
         self.databaseManager = databaseManager
         self.settingsManager = settingsManager
+        self.settingsManager.delegate = self
     }
     
-    func loadFeed(_ completion: @escaping ()->()) {
-        let activeSources = settingsManager.sources().filter{ $0.isActive == true }
+    @objc func refreshViaTimer(timer: Timer) {
+        loadFeed {}
+    }
+    
+    @objc func loadFeed(_ completion: @escaping ()->()) {
+        print("Load Feed: ", Date())
+        let feedGroup = DispatchGroup()
+        let activeSources = settingsManager.sources().filter { $0.isActive == true }
         let fetchers = activeSources.map { NetworkFeedFetcher(with: $0.url) }
-        
         var feedItems: [FeedItem] = []
-        var counter: Int = 0
-        
-        #warning("Can be case of race conditions. Should work via DispatchGroup")
-        #warning("Вынести в отдельный метод (будет юзаться больше одного раза)")
-        fetchers.enumerated().forEach { [weak self] index, feedFetcher in
+        fetchers.enumerated().forEach { index, feedFetcher in
+            feedGroup.enter()
             feedFetcher.fetchFeed { result in
-                assert(Thread.isMainThread)
                 switch result {
                 case .success(let fetchFeedItems):
-                    counter += 1
                     feedItems += fetchFeedItems
-                    if counter == fetchers.count {
-                        self?.databaseManager.saveFeedItems(feedItems)
-                        completion()
-                    }
                 case .failure(let error):
                     assertionFailure(error.localizedDescription)
                 }
+                feedGroup.leave()
             }
+        }
+
+        feedGroup.notify(queue: .main) { [weak self] in
+            self?.databaseManager.saveFeedItems(feedItems)
+            completion()
+            self?.delegate?.onFeedLoaded()
         }
     }
     
@@ -61,4 +70,12 @@ class FeedManager: FeedManagerProtocol {
         databaseManager.updateUnreadStatus(item, fullyWatched: fullyWatched)
     }
     
+}
+
+extension FeedManager: SettingsManagerDelegate {
+    
+    func onTimerValueChanged(value: TimeInterval) {
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(timeInterval: value, target: self, selector: #selector(refreshViaTimer(timer:)), userInfo: nil, repeats: true)
+    }
 }
