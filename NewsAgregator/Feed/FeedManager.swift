@@ -78,4 +78,7 @@ extension FeedManager: SettingsManagerDelegate {
         timer?.invalidate()
         timer = Timer.scheduledTimer(timeInterval: value, target: self, selector: #selector(refreshViaTimer(timer:)), userInfo: nil, repeats: true)
     }
+    func onNewSourceAdded() {
+        loadFeed {}
+    }
 }

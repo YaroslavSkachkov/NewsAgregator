@@ -10,7 +10,6 @@ import UIKit
 
 class SettingsVC: UIViewController {
     
-    
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var refreshTimePicker: UIDatePicker!
     
@@ -20,7 +19,7 @@ class SettingsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.urlTextField.delegate = self
         self.settingsTable.dataSource = self
         self.settingsTable.register(UINib(nibName: "TextFieldCell", bundle: nil), forCellReuseIdentifier: "textFieldCell")
         self.settingsTable.register(UINib(nibName: "FetcherCell", bundle: nil), forCellReuseIdentifier: "fetcherCell")
@@ -33,6 +32,7 @@ class SettingsVC: UIViewController {
         } else {
             assertionFailure("Make alert view")
         }
+        view.endEditing(true)
         self.settingsTable.reloadData()
     }
     
@@ -61,5 +61,22 @@ extension SettingsVC: UITableViewDataSource {
         }
         
         return fetcherCell
+    }
+}
+
+extension UIViewController: UITextFieldDelegate {
+    func hideKeyboardWhenViewTapped() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return false
     }
 }

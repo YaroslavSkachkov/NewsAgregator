@@ -10,7 +10,7 @@ import UIKit
 import SafariServices
 import Kingfisher
 
-protocol FeedTableVCDelegate {
+protocol FeedTableVCDelegate: class {
     func onSettingsButtonTapped()
 }
 
@@ -21,7 +21,7 @@ class FeedTableVC: UITableViewController {
     var feedItems: [FeedItem] = []
     var isExpand: Bool = true
     var feedManager: FeedManagerProtocol!
-    var delegate: FeedTableVCDelegate?
+    weak var delegate: FeedTableVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()

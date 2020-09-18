@@ -10,6 +10,7 @@ import Foundation
 
 protocol SettingsManagerDelegate: class {
     func onTimerValueChanged(value: TimeInterval)
+    func onNewSourceAdded()
 }
 
 protocol Settings: class {
@@ -33,6 +34,7 @@ class SettingsManager: Settings {
     
     func add(fetchedURL: URL) {
         databaseManager?.saveSources(from: fetchedURL)
+        delegate?.onNewSourceAdded()
     }
     
     func sources() -> [Source] {
