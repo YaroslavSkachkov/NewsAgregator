@@ -9,3 +9,4 @@
 import Foundation
 
 //    https://www.gazeta.ru/export/rss/first.xml
+//    http://lenta.ru/rss/news
