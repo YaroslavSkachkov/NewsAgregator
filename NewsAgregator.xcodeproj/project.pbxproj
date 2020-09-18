@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C4186CD92514980300DBC361 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4186CD82514980300DBC361 /* SettingsManager.swift */; };
 		C41B966025080D6500D3F3EE /* NetworkFeedFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41B965F25080D6500D3F3EE /* NetworkFeedFetcher.swift */; };
 		C41B9662250811DD00D3F3EE /* FeedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41B9661250811DD00D3F3EE /* FeedManager.swift */; };
 		C41B966425082E9000D3F3EE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41B966325082E9000D3F3EE /* Constants.swift */; };
@@ -35,6 +36,7 @@
 /* Begin PBXFileReference section */
 		5C439FE82485D181AD5B26EC /* Pods-NewsAgregator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsAgregator.release.xcconfig"; path = "Target Support Files/Pods-NewsAgregator/Pods-NewsAgregator.release.xcconfig"; sourceTree = "<group>"; };
 		7AC0D01636A3AF708D6CE06C /* Pods-NewsAgregator.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsAgregator.debug.xcconfig"; path = "Target Support Files/Pods-NewsAgregator/Pods-NewsAgregator.debug.xcconfig"; sourceTree = "<group>"; };
+		C4186CD82514980300DBC361 /* SettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsManager.swift; sourceTree = "<group>"; };
 		C41B965F25080D6500D3F3EE /* NetworkFeedFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFeedFetcher.swift; sourceTree = "<group>"; };
 		C41B9661250811DD00D3F3EE /* FeedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedManager.swift; sourceTree = "<group>"; };
 		C41B966325082E9000D3F3EE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -91,6 +93,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C4186CDA2514981F00DBC361 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				C4A32AAF2510CDFE00C7ED16 /* SettingsModel.swift */,
+				C4186CD82514980300DBC361 /* SettingsManager.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		C4186CDB251499D600DBC361 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				C41B965F25080D6500D3F3EE /* NetworkFeedFetcher.swift */,
+				C41B9661250811DD00D3F3EE /* FeedManager.swift */,
+				C41B96652508E6ED00D3F3EE /* FeedItem.swift */,
+				C42ACC4D250E72E40064B908 /* FeedStatusView.swift */,
+				C41B96672508E80900D3F3EE /* FeedTransformer.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
 		C4572567250B7C7900494CC1 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,13 +149,9 @@
 				C4720812250786CF00EA2727 /* SceneDelegate.swift */,
 				C41B966925092B8900D3F3EE /* Extensions.swift */,
 				C4BFAF83250A0DD200430704 /* Errors.swift */,
-				C41B965F25080D6500D3F3EE /* NetworkFeedFetcher.swift */,
-				C41B9661250811DD00D3F3EE /* FeedManager.swift */,
-				C4A32AAF2510CDFE00C7ED16 /* SettingsModel.swift */,
+				C4186CDB251499D600DBC361 /* Feed */,
+				C4186CDA2514981F00DBC361 /* Settings */,
 				C4657C35250FF34A0092EE7E /* DatabaseManager.swift */,
-				C41B96672508E80900D3F3EE /* FeedTransformer.swift */,
-				C41B96652508E6ED00D3F3EE /* FeedItem.swift */,
-				C42ACC4D250E72E40064B908 /* FeedStatusView.swift */,
 				C4572567250B7C7900494CC1 /* UserInterface */,
 				C4720819250786D100EA2727 /* Assets.xcassets */,
 				C472081B250786D100EA2727 /* LaunchScreen.storyboard */,
@@ -290,6 +309,7 @@
 				C41B9662250811DD00D3F3EE /* FeedManager.swift in Sources */,
 				C41B966A25092B8900D3F3EE /* Extensions.swift in Sources */,
 				C41B96662508E6ED00D3F3EE /* FeedItem.swift in Sources */,
+				C4186CD92514980300DBC361 /* SettingsManager.swift in Sources */,
 				C4BFAF84250A0DD200430704 /* Errors.swift in Sources */,
 				C41B966425082E9000D3F3EE /* Constants.swift in Sources */,
 				C4CC558C2510E6BF006D875A /* FetcherCell.swift in Sources */,

@@ -14,6 +14,9 @@ protocol DatabaseManagerProtocol {
     func getFeedItems() -> [FeedItem]
     func updateUnreadStatus(_ item: FeedItem, fullyWatched: Bool)
     func removeFeedItem()
+    func saveSources(from url: URL)
+    func getSettingsSources() -> [Source]
+    func updateSourceActiveness(url: URL, active: Bool)
 }
 
 class DatabaseManager: DatabaseManagerProtocol {
@@ -66,6 +69,40 @@ class DatabaseManager: DatabaseManagerProtocol {
             print(NAError.writingToDBError.localizedDescription)
         }
     }
+    
+    // Settings
+    
+    func saveSources(from url: URL) {
+        let sourceRealmObject = SourceRealmObject()
+        sourceRealmObject.url = url.absoluteString
+        sourceRealmObject.isActive = true
+        do {
+            try realm.write() {
+                if (realm.object(ofType: SourceRealmObject.self, forPrimaryKey: sourceRealmObject.url) == nil) {
+                    realm.add(sourceRealmObject)
+                }
+            }
+        } catch {
+            assertionFailure(NAError.writingToDBError.localizedDescription)
+            print(NAError.writingToDBError.localizedDescription)
+        }
+    }
+    
+    func getSettingsSources() -> [Source] {
+        return realm.objects(SourceRealmObject.self).map{ Source(url: URL(string: $0.url)!, isActive: $0.isActive) }
+    }
+    
+    func updateSourceActiveness(url: URL, active: Bool) {
+        do {
+            try realm.write() {
+                realm.object(ofType: SourceRealmObject.self, forPrimaryKey: url.absoluteString)?.isActive = active
+            }
+        } catch {
+            assertionFailure(NAError.writingToDBError.localizedDescription)
+            print(NAError.writingToDBError.localizedDescription)
+        }
+    }
+    
 }
 
 

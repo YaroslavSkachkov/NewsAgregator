@@ -14,14 +14,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var navController: UINavigationController?
     var window: UIWindow?
-    let settingsManager: SettingsManager = SettingsManager(realm: try! Realm())
+    let databaseManager: DatabaseManager = DatabaseManager(realm: try! Realm())
+    let settingsManager: SettingsManager = SettingsManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         self.window = UIWindow(frame:UIScreen.main.bounds)
+        
         let feedTableVC = FeedTableVC()
         feedTableVC.delegate = self
-        feedTableVC.feedManager = FeedManager(databaseManager: DatabaseManager(realm: try! Realm()), settingsManager: settingsManager)
+        settingsManager.databaseManager = databaseManager
+        feedTableVC.feedManager = FeedManager(databaseManager: databaseManager, settingsManager: settingsManager)
         navController = UINavigationController(rootViewController: feedTableVC)
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
