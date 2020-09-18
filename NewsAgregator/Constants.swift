@@ -8,6 +8,4 @@
 
 import Foundation
 
-#warning("For future constants")
-
 //    https://www.gazeta.ru/export/rss/first.xml

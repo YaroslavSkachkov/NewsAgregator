@@ -49,7 +49,7 @@ class FeedManager: FeedManagerProtocol {
                 case .success(let fetchFeedItems):
                     feedItems += fetchFeedItems
                 case .failure(let error):
-                    assertionFailure(error.localizedDescription)
+                    printError(error)
                 }
                 feedGroup.leave()
             }

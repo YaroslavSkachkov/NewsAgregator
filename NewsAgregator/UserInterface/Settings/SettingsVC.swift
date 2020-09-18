@@ -30,7 +30,7 @@ class SettingsVC: UIViewController {
         if let url = URL(string: urlTextField.text ?? "") {
             settingsManager.add(fetchedURL: url)
         } else {
-            assertionFailure("Make alert view")
+            printError(NAError.invalidURLString)
         }
         view.endEditing(true)
         self.settingsTable.reloadData()
@@ -50,8 +50,6 @@ extension SettingsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let sources: [Source] = settingsManager.sources()
         let fetcherCell: FetcherCell = tableView.dequeueReusableCell(withIdentifier: "fetcherCell", for: indexPath) as! FetcherCell
-        
-        #warning("траблы с хостом, может выводиться без хоста")
         
         fetcherCell.textLabel?.text = sources[indexPath.row].url.host
         fetcherCell.isActiveSwitch.isOn = sources[indexPath.row].isActive

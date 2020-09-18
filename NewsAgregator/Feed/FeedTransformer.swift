@@ -9,8 +9,6 @@
 import UIKit
 import FeedKit
 
-#warning("FeedItem models should be improved in case of unusual rss model (like from buzzfeed.com)")
-
 class FeedTransformer {
     
     static let sharedInstance: FeedTransformer = {
@@ -26,7 +24,7 @@ class FeedTransformer {
             do {
                 transformedFeedItems.append(try transformFeedItem(feedItem, from: url))
             } catch {
-                print(error.localizedDescription)
+                printError(error)
             }
         }
         return transformedFeedItems
@@ -78,7 +76,6 @@ class FeedTransformer {
                           source: source,
                           unread: true)
         }
-        assertionFailure(NAError.transformationError.localizedDescription)
         throw NAError.transformationError
     }
 }

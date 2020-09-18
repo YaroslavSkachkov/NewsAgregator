@@ -13,7 +13,6 @@ protocol DatabaseManagerProtocol {
     func saveFeedItems(_ feedItems: [FeedItem])
     func getFeedItems() -> [FeedItem]
     func updateUnreadStatus(_ item: FeedItem, fullyWatched: Bool)
-    func removeFeedItem()
     func saveSources(from url: URL)
     func getSettingsSources() -> [Source]
     func updateSourceActiveness(url: URL, active: Bool)
@@ -37,8 +36,8 @@ class DatabaseManager: DatabaseManagerProtocol {
                     }
                 }
             } catch {
-                assertionFailure(NAError.writingToDBError.localizedDescription)
-                print(NAError.writingToDBError.localizedDescription)
+                printError(NAError.writingToDBError)
+                printError(error)
             }
         }
     }
@@ -49,14 +48,10 @@ class DatabaseManager: DatabaseManagerProtocol {
             do {
                 try feedItems.append(FeedTransformer.sharedInstance.transformFromFeedItemRealmObj(feedItem))
             } catch {
-                assertionFailure(error.localizedDescription)
+                printError(error)
             }
         }
         return feedItems
-    }
-    
-    func removeFeedItem() {
-        #warning("TODO")
     }
     
     func updateUnreadStatus(_ item: FeedItem, fullyWatched: Bool) {
@@ -65,8 +60,8 @@ class DatabaseManager: DatabaseManagerProtocol {
                 realm.object(ofType: FeedItemRealmObject.self, forPrimaryKey: item.url.absoluteString)?.unread = fullyWatched
             }
         } catch {
-            assertionFailure(NAError.writingToDBError.localizedDescription)
-            print(NAError.writingToDBError.localizedDescription)
+            printError(NAError.writingToDBError)
+            printError(error)
         }
     }
     
@@ -83,8 +78,8 @@ class DatabaseManager: DatabaseManagerProtocol {
                 }
             }
         } catch {
-            assertionFailure(NAError.writingToDBError.localizedDescription)
-            print(NAError.writingToDBError.localizedDescription)
+            printError(NAError.writingToDBError)
+            printError(error)
         }
     }
     
@@ -98,8 +93,8 @@ class DatabaseManager: DatabaseManagerProtocol {
                 realm.object(ofType: SourceRealmObject.self, forPrimaryKey: url.absoluteString)?.isActive = active
             }
         } catch {
-            assertionFailure(NAError.writingToDBError.localizedDescription)
-            print(NAError.writingToDBError.localizedDescription)
+            printError(NAError.writingToDBError)
+            printError(error)
         }
     }
     

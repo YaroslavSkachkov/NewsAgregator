@@ -14,13 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var navController: UINavigationController?
     var window: UIWindow?
-    let databaseManager: DatabaseManager = DatabaseManager(realm: try! Realm())
     let settingsManager: SettingsManager = SettingsManager()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         self.window = UIWindow(frame:UIScreen.main.bounds)
-        
+        let databaseManager: DatabaseManager = DatabaseManager(realm: try! Realm())
         let feedTableVC = FeedTableVC()
         feedTableVC.delegate = self
         settingsManager.databaseManager = databaseManager

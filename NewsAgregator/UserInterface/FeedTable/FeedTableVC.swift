@@ -14,8 +14,6 @@ protocol FeedTableVCDelegate: class {
     func onSettingsButtonTapped()
 }
 
-#warning("ИСПРАВИТЬ КЕЙС ФЕТЧА НОВОСТИ БЕЗ ДЕСКРИПШЕНА")
-
 class FeedTableVC: UITableViewController {
     
     var feedItems: [FeedItem] = []

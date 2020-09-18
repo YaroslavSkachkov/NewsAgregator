@@ -41,7 +41,6 @@ extension Result where Success == Feed {
             if let feedItems = feed.rssFeed?.items {
                 return FeedTransformer.sharedInstance.transformFeedItems(feedItems, from: url)
             }
-            assertionFailure("Invalid feed type (not RSS)")
             throw NAError.invalidFeedType
         case .failure(let error):
             throw error
