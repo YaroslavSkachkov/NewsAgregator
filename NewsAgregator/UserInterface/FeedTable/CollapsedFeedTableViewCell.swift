@@ -1,19 +1,18 @@
 //
-//  FeedTableViewCell.swift
+//  CollapsedFeedTableViewCell.swift
 //  NewsAgregator
 //
-//  Created by Ярослав on 9/11/20.
+//  Created by Ярослав on 9/18/20.
 //  Copyright © 2020 YaroslavSkachkov. All rights reserved.
 //
 
 import UIKit
 
-class FeedTableViewCell: UITableViewCell {
-
+class CollapsedFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var sourceLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var feedImageView: UIImageView!
+    
     var feedStatusView = FeedStatusView(frame: .zero)
     var unread = false {
            didSet {
@@ -46,4 +45,5 @@ class FeedTableViewCell: UITableViewCell {
         feedStatusView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 12).isActive = true
         feedStatusView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 7).isActive = true
     }
+    
 }

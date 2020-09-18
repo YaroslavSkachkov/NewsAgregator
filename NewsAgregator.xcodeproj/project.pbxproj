@@ -24,6 +24,8 @@
 		C4720813250786CF00EA2727 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4720812250786CF00EA2727 /* SceneDelegate.swift */; };
 		C472081A250786D100EA2727 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4720819250786D100EA2727 /* Assets.xcassets */; };
 		C472081D250786D100EA2727 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C472081B250786D100EA2727 /* LaunchScreen.storyboard */; };
+		C472FDB32514C466006486ED /* CollapsedFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C472FDB12514C466006486ED /* CollapsedFeedTableViewCell.swift */; };
+		C472FDB42514C466006486ED /* CollapsedFeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C472FDB22514C466006486ED /* CollapsedFeedTableViewCell.xib */; };
 		C4A32AB02510CDFE00C7ED16 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A32AAF2510CDFE00C7ED16 /* SettingsModel.swift */; };
 		C4A32AB52510DD7200C7ED16 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A32AB32510DD7200C7ED16 /* SettingsVC.swift */; };
 		C4A32AB62510DD7200C7ED16 /* SettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = C4A32AB42510DD7200C7ED16 /* SettingsVC.xib */; };
@@ -55,6 +57,8 @@
 		C4720819250786D100EA2727 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C472081C250786D100EA2727 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C472081E250786D100EA2727 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C472FDB12514C466006486ED /* CollapsedFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollapsedFeedTableViewCell.swift; sourceTree = "<group>"; };
+		C472FDB22514C466006486ED /* CollapsedFeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollapsedFeedTableViewCell.xib; sourceTree = "<group>"; };
 		C4A32AAF2510CDFE00C7ED16 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		C4A32AB32510DD7200C7ED16 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		C4A32AB42510DD7200C7ED16 /* SettingsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsVC.xib; sourceTree = "<group>"; };
@@ -167,6 +171,8 @@
 				C4572564250B7A7800494CC1 /* FeedTableVC.xib */,
 				C4572568250B7CDF00494CC1 /* FeedTableViewCell.swift */,
 				C4572569250B7CDF00494CC1 /* FeedTableViewCell.xib */,
+				C472FDB12514C466006486ED /* CollapsedFeedTableViewCell.swift */,
+				C472FDB22514C466006486ED /* CollapsedFeedTableViewCell.xib */,
 			);
 			path = FeedTable;
 			sourceTree = "<group>";
@@ -246,6 +252,7 @@
 				C457256B250B7CDF00494CC1 /* FeedTableViewCell.xib in Resources */,
 				C472081A250786D100EA2727 /* Assets.xcassets in Resources */,
 				C4572566250B7A7800494CC1 /* FeedTableVC.xib in Resources */,
+				C472FDB42514C466006486ED /* CollapsedFeedTableViewCell.xib in Resources */,
 				C4A32AB62510DD7200C7ED16 /* SettingsVC.xib in Resources */,
 				C4CC558D2510E6BF006D875A /* FetcherCell.xib in Resources */,
 			);
@@ -316,6 +323,7 @@
 				C4720811250786CF00EA2727 /* AppDelegate.swift in Sources */,
 				C4A32AB02510CDFE00C7ED16 /* SettingsModel.swift in Sources */,
 				C4720813250786CF00EA2727 /* SceneDelegate.swift in Sources */,
+				C472FDB32514C466006486ED /* CollapsedFeedTableViewCell.swift in Sources */,
 				C4A32AB52510DD7200C7ED16 /* SettingsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

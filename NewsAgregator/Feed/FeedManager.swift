@@ -37,7 +37,6 @@ class FeedManager: FeedManagerProtocol {
     }
     
     @objc func loadFeed(_ completion: @escaping ()->()) {
-        print("Load Feed: ", Date())
         let feedGroup = DispatchGroup()
         let activeSources = settingsManager.sources().filter { $0.isActive == true }
         let fetchers = activeSources.map { NetworkFeedFetcher(with: $0.url) }
